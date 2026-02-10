@@ -1,0 +1,302 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const secciones = [
+  {
+    icon: "database",
+    titulo: "1. Información que Recopilamos",
+    contenido:
+      "Recopilamos información que usted nos proporciona directamente al contratar nuestros servicios, incluyendo: nombre, empresa, correo electrónico, número de teléfono, dirección, información fiscal (RFC), y cualquier otra información necesaria para la prestación de servicios. También podemos recopilar información técnica de manera automática cuando utiliza nuestros sistemas o plataformas.",
+  },
+  {
+    icon: "lock",
+    titulo: "2. Uso de la Información",
+    contenido:
+      "Utilizamos la información recopilada para: prestar nuestros servicios de consultoría y soluciones tecnológicas, procesar pagos y facturación, comunicarnos con usted sobre servicios contratados, enviar actualizaciones técnicas y de seguridad, mejorar nuestros servicios, cumplir con obligaciones legales y fiscales, y responder a solicitudes de soporte técnico.",
+  },
+  {
+    icon: "shield",
+    titulo: "3. Protección de Datos Personales",
+    contenido:
+      "Unidad C se compromete a proteger sus datos personales de acuerdo con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP). Implementamos medidas de seguridad administrativas, técnicas y físicas para proteger sus datos contra acceso no autorizado, uso indebido, alteración o destrucción.",
+  },
+  {
+    icon: "share",
+    titulo: "4. Compartir Información",
+    contenido:
+      "No vendemos ni alquilamos su información personal a terceros. Podemos compartir información únicamente con: proveedores de servicios que nos ayudan a operar nuestro negocio (hosting, procesadores de pago, etc.), autoridades gubernamentales cuando sea requerido por ley, socios comerciales autorizados para la prestación de servicios específicos (como distribuidores de software), y siempre bajo estrictos acuerdos de confidencialidad.",
+  },
+  {
+    titulo: "5. Cookies y Tecnologías Similares",
+    contenido:
+      "Nuestro sitio web puede utilizar cookies y tecnologías similares para mejorar la experiencia del usuario, analizar el tráfico del sitio y personalizar contenido. Usted puede configurar su navegador para rechazar cookies, aunque esto puede afectar la funcionalidad de nuestro sitio.",
+  },
+  {
+    titulo: "6. Derechos ARCO",
+    contenido:
+      "De conformidad con la LFPDPPP, usted tiene derecho a Acceder a sus datos personales, Rectificar datos incorrectos o incompletos, Cancelar sus datos cuando considere que no están siendo tratados conforme a la ley, y Oponerse al tratamiento de sus datos para fines específicos. Para ejercer estos derechos, puede contactarnos a través de info@unidadc.com.",
+  },
+  {
+    titulo: "7. Seguridad de la Información",
+    contenido:
+      "Implementamos medidas de seguridad que incluyen: encriptación de datos sensibles, controles de acceso restringido, monitoreo continuo de sistemas, copias de seguridad regulares, capacitación del personal en protección de datos, y auditorías periódicas de seguridad. Sin embargo, ningún método de transmisión por Internet es 100% seguro.",
+  },
+  {
+    titulo: "8. Retención de Datos",
+    contenido:
+      "Conservaremos su información personal durante el tiempo necesario para cumplir con los propósitos descritos en este aviso, salvo que exista una obligación legal de conservarlos por más tiempo. Los datos relacionados con obligaciones fiscales se conservarán por al menos 5 años, conforme a la legislación mexicana.",
+  },
+  {
+    titulo: "9. Transferencias Internacionales",
+    contenido:
+      "En caso de que sea necesario transferir sus datos personales a otros países, lo haremos asegurándonos de que el país de destino cuente con un nivel de protección de datos adecuado o implementando medidas de seguridad adicionales, como cláusulas contractuales estándar.",
+  },
+  {
+    titulo: "10. Menores de Edad",
+    contenido:
+      "Nuestros servicios están dirigidos a empresas y profesionales. No recopilamos intencionalmente información personal de menores de 18 años. Si descubrimos que hemos recopilado datos de un menor, tomaremos medidas para eliminarlos de inmediato.",
+  },
+  {
+    titulo: "11. Enlaces a Sitios de Terceros",
+    contenido:
+      "Nuestro sitio web puede contener enlaces a sitios de terceros. No somos responsables de las prácticas de privacidad de estos sitios. Le recomendamos leer las políticas de privacidad de cualquier sitio web que visite.",
+  },
+  {
+    titulo: "12. Modificaciones al Aviso de Privacidad",
+    contenido:
+      "Unidad C se reserva el derecho de modificar este Aviso de Privacidad en cualquier momento. Las modificaciones serán publicadas en nuestro sitio web con la fecha de actualización correspondiente. Le recomendamos revisar periódicamente este aviso para estar informado sobre cómo protegemos su información.",
+  },
+  {
+    titulo: "13. Consentimiento",
+    contenido:
+      "Al proporcionar sus datos personales y utilizar nuestros servicios, usted consiente el tratamiento de su información personal de acuerdo con los términos establecidos en este Aviso de Privacidad. Si no está de acuerdo con estos términos, le solicitamos no proporcionar su información personal.",
+  },
+];
+
+const fechaActual = new Date().toLocaleDateString("es-MX", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<Layout title="Aviso de Privacidad - Unidad C">
+  <main class="min-h-screen w-full bg-gradient-to-b from-gray-50 to-white pt-20">
+    <!-- Hero Section -->
+    <section
+      class="relative w-full overflow-hidden bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800 py-16 text-white md:py-32"
+    >
+      <div
+        class="absolute inset-0 bg-[url('/images/fondo_hero1.webp')] bg-cover bg-center opacity-5"
+      >
+      </div>
+
+      <div class="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <div
+            class="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md"
+          >
+            <svg
+              class="h-10 w-10 text-orange-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+              ></path>
+            </svg>
+          </div>
+
+          <h1 class="mb-4 text-3xl font-bold md:text-4xl lg:text-5xl">Aviso de Privacidad</h1>
+          <p class="mx-auto max-w-3xl text-base text-indigo-100 md:text-lg">
+            Última actualización: {fechaActual}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Introducción -->
+    <section class="w-full px-4 py-12 sm:px-6 md:py-16 lg:px-8">
+      <div class="mx-auto max-w-4xl">
+        <div
+          class="rounded-r-lg border-l-4 border-indigo-600 bg-gradient-to-r from-indigo-50 to-purple-50 p-6 md:p-8"
+        >
+          <div class="flex items-start space-x-4">
+            <svg
+              class="mt-1 h-6 w-6 flex-shrink-0 text-indigo-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+              ></path>
+            </svg>
+            <div>
+              <h2 class="mb-3 text-xl font-bold text-gray-800 md:text-2xl">
+                Compromiso con su Privacidad
+              </h2>
+              <p class="mb-3 text-sm leading-relaxed text-gray-700 md:text-base">
+                En <strong>Unidad C</strong>, nos tomamos muy en serio la protección de sus datos
+                personales. Este Aviso de Privacidad describe cómo recopilamos, usamos, compartimos
+                y protegemos su información personal de conformidad con la Ley Federal de Protección
+                de Datos Personales en Posesión de los Particulares.
+              </p>
+              <p class="text-sm leading-relaxed text-gray-700 md:text-base">
+                <strong>Responsable:</strong> Unidad C<br />
+                <strong>Domicilio:</strong> Información disponible bajo solicitud<br />
+                <strong>Contacto:</strong> info@unidadc.com
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Secciones de Privacidad -->
+    <section class="w-full px-4 py-8 sm:px-6 md:py-12 lg:px-8">
+      <div class="mx-auto max-w-4xl space-y-6 md:space-y-8">
+        {
+          secciones.map((seccion) => (
+            <div class="rounded-xl bg-white p-6 shadow-md transition-shadow duration-300 hover:shadow-lg md:p-8">
+              <div class="flex items-start space-x-4">
+                {seccion.icon && (
+                  <div class="flex-shrink-0">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600">
+                      {seccion.icon === "database" && (
+                        <svg
+                          class="h-6 w-6 text-white"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"
+                          />
+                        </svg>
+                      )}
+                      {seccion.icon === "lock" && (
+                        <svg
+                          class="h-6 w-6 text-white"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                          />
+                        </svg>
+                      )}
+                      {seccion.icon === "shield" && (
+                        <svg
+                          class="h-6 w-6 text-white"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                          />
+                        </svg>
+                      )}
+                      {seccion.icon === "share" && (
+                        <svg
+                          class="h-6 w-6 text-white"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+                          />
+                        </svg>
+                      )}
+                    </div>
+                  </div>
+                )}
+                <div class="flex-1">
+                  <h3 class="mb-3 text-lg font-bold text-gray-800 md:mb-4 md:text-xl">
+                    {seccion.titulo}
+                  </h3>
+                  <p class="text-sm leading-relaxed text-gray-700 md:text-base">
+                    {seccion.contenido}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Ejercer Derechos ARCO -->
+    <section
+      class="w-full bg-gradient-to-b from-white to-gray-50 px-4 py-12 sm:px-6 md:py-16 lg:px-8"
+    >
+      <div class="mx-auto max-w-4xl">
+        <div
+          class="rounded-2xl bg-gradient-to-br from-indigo-600 to-purple-700 p-8 text-white shadow-xl md:p-10"
+        >
+          <h2 class="mb-4 text-2xl font-bold md:text-3xl">¿Cómo ejercer sus Derechos ARCO?</h2>
+          <p class="mb-6 text-base text-indigo-100 md:text-lg">
+            Para ejercer sus derechos de Acceso, Rectificación, Cancelación u Oposición (ARCO),
+            puede contactarnos a través de:
+          </p>
+          <div class="space-y-3">
+            <p class="text-base md:text-lg">
+              <strong>Email:</strong>
+              <a
+                href="mailto:info@unidadc.com"
+                class="text-white underline transition-colors hover:text-orange-500"
+              >
+                info@unidadc.com
+              </a>
+            </p>
+            <p class="text-base md:text-lg">
+              <strong>Teléfono:</strong>
+              <a
+                href="tel:+525560000199"
+                class="text-white underline transition-colors hover:text-orange-500"
+              >
+                +52 (55) 6000-0199
+              </a>
+            </p>
+            <p class="text-base md:text-lg">
+              <strong>WhatsApp:</strong>
+              <a
+                href="https://wa.me/5215660000199?text=Hola,%20quiero%20ejercer%20mis%20derechos%20ARCO"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-white underline transition-colors hover:text-orange-500"
+              >
+                Enviar mensaje
+              </a>
+            </p>
+          </div>
+          <p class="mt-6 text-sm text-indigo-100 md:text-base">
+            Le responderemos a su solicitud en un plazo máximo de 20 días hábiles.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

@@ -1,0 +1,59 @@
+---
+const benefits = [
+  {
+    title: "Integridad a tu servicio",
+    icon: `<svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+		</svg>`,
+  },
+  {
+    title: "Soporte Especializado",
+    icon: `<svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
+		</svg>`,
+  },
+  {
+    title: "Soluciones Personalizadas",
+    icon: `<svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+		</svg>`,
+  },
+  {
+    title: "Sinergia Tecnológica",
+    icon: `<svg class="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+		</svg>`,
+  },
+  {
+    title: "Visión Estratégica",
+    icon: `<svg class="w-6 h-6 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+		</svg>`,
+  },
+  {
+    title: "Seguridad y Cumplimiento",
+    icon: `<svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+		</svg>`,
+  },
+];
+---
+
+<section class="w-full overflow-x-hidden bg-white px-4 py-12 sm:px-6 md:py-20 lg:px-8">
+  <div class="mx-auto max-w-6xl">
+    <h2 class="mb-8 text-center text-3xl font-bold text-gray-800 md:mb-12 md:text-4xl">
+      ¿Por qué Elegirnos?
+    </h2>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
+      {
+        benefits.map((benefit) => (
+          <div class="flex items-start space-x-3 rounded-lg bg-gray-50 p-4 shadow transition-all duration-200 hover:shadow-lg hover:scale-[1.02] md:p-6 hover-lift">
+            <div set:html={benefit.icon} />
+            <p class="text-base font-medium text-gray-700 md:text-lg">{benefit.title}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

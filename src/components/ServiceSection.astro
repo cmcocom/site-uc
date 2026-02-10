@@ -1,0 +1,69 @@
+---
+const services = [
+  {
+    title: "Consultoría TI",
+    description: "Asesoramiento estratégico para optimizar tu infraestructura tecnológica",
+    icon: "🚀",
+  },
+  {
+    title: "Desarrollo a Medida",
+    description: "Soluciones de software personalizadas para tus necesidades específicas",
+    icon: "💻",
+  },
+  {
+    title: "Soporte Técnico",
+    description: "Mantenimiento y soporte preventivo para mantener tus sistemas operativos",
+    icon: "🛠️",
+  },
+  {
+    title: "Seguridad Informática",
+    description: "Protección de datos y sistemas contra amenazas cibernéticas",
+    icon: "🔒",
+  },
+  {
+    title: "Cloud Computing",
+    description: "Migración y gestión de servicios en la nube para mayor eficiencia",
+    icon: "☁️",
+  },
+  {
+    title: "Capacitación",
+    description: "Formación técnica para tu equipo en las últimas tecnologías",
+    icon: "📚",
+  },
+];
+---
+
+<section class="w-full bg-gray-50 px-4 py-12 sm:px-6 md:py-20 lg:px-8">
+  <div class="mx-auto max-w-6xl">
+    <h2 class="mb-4 text-center text-3xl font-bold text-gray-800 md:mb-6 md:text-4xl">
+      Nuestros Servicios
+    </h2>
+    <p class="mx-auto mb-12 text-center text-lg text-gray-600 max-w-3xl">
+      Ofrecemos soluciones integrales de tecnología para impulsar el crecimiento de tu negocio
+    </p>
+
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {
+        services.map((service) => (
+          <div class="bg-white rounded-xl p-6 shadow-lg hover-lift text-center">
+            <div class="text-4xl mb-4">{service.icon}</div>
+            <h3 class="text-xl font-semibold text-gray-800 mb-3">{service.title}</h3>
+            <p class="text-gray-600">{service.description}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="text-center mt-10">
+      <a
+        href="https://wa.me/5215660000199?text=UCServicios: Hola,%20me%20interesa%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios."
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Solicitar Cotización"
+        class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors duration-200"
+      >
+        Solicitar Cotización
+      </a>
+    </div>
+  </div>
+</section>

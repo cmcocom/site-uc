@@ -1,0 +1,12 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Google Bot
+User-agent: Googlebot
+Allow: /
+
+# Sitemap
+Sitemap: https://unidadc.com/sitemap.xml

@@ -1,0 +1,258 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const valores = [
+  {
+    icon: "shield",
+    title: "Integridad",
+    description: "Trabajamos con transparencia y ética en cada proyecto",
+  },
+  {
+    icon: "lightbulb",
+    title: "Innovación",
+    description: "Soluciones tecnológicas de vanguardia para tu negocio",
+  },
+  {
+    icon: "users",
+    title: "Compromiso",
+    description: "Tu éxito es nuestro éxito, acompañándote en cada paso",
+  },
+  {
+    icon: "rocket",
+    title: "Excelencia",
+    description: "Calidad y profesionalismo en cada servicio",
+  },
+];
+---
+
+<Layout title="Sobre Nosotros - Unidad C">
+  <main class="min-h-screen w-full bg-gradient-to-b from-gray-50 to-white pt-20">
+    <!-- Hero Section -->
+    <section
+      class="relative w-full overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900 py-20 text-white md:py-32"
+    >
+      <div
+        class="absolute inset-0 bg-[url('/images/fondo_hero1.webp')] bg-cover bg-center opacity-10"
+      >
+      </div>
+
+      <div class="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <div class="mb-8 flex justify-center">
+            <img
+              src="/images/logo_uc_orange_hd.svg"
+              alt="Logo Unidad C"
+              width="200"
+              height="auto"
+              class="drop-shadow-2xl"
+            />
+          </div>
+
+          <h1 class="mb-6 text-4xl font-bold md:text-5xl lg:text-6xl">Sobre Nosotros</h1>
+          <p class="mx-auto max-w-3xl text-lg text-blue-100 md:text-xl lg:text-2xl">
+            Transformando empresas a través de soluciones
+          </p>
+          <p class="mx-auto max-w-3xl text-lg text-blue-100 md:text-xl lg:text-2xl">
+            tecnológicas seguras
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Misión y Visión -->
+    <section class="w-full px-4 py-16 sm:px-6 md:py-24 lg:px-8">
+      <div class="mx-auto max-w-6xl">
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12">
+          <div
+            class="rounded-2xl bg-gradient-to-br from-blue-50 to-white p-8 shadow-lg transition-shadow duration-300 hover:shadow-xl md:p-10"
+          >
+            <div class="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-blue-600">
+              <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <h2 class="mb-4 text-3xl font-bold text-gray-800 md:text-4xl">Nuestra Misión</h2>
+            <p class="text-base leading-relaxed text-gray-700 md:text-lg">
+              Proporcionar soluciones tecnológicas de excelencia que impulsen el crecimiento y la
+              eficiencia de nuestros clientes, a través de servicios especializados en consultoría
+              TI, ciberseguridad, desarrollo de software y sistemas empresariales.
+            </p>
+          </div>
+
+          <div
+            class="rounded-2xl bg-gradient-to-br from-orange-50 to-white p-8 shadow-lg transition-shadow duration-300 hover:shadow-xl md:p-10"
+          >
+            <div class="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-orange-500">
+              <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                ></path>
+              </svg>
+            </div>
+            <h2 class="mb-4 text-3xl font-bold text-gray-800 md:text-4xl">Nuestra Visión</h2>
+            <p class="text-base leading-relaxed text-gray-700 md:text-lg">
+              Ser reconocidos como el aliado tecnológico de confianza para empresas en México,
+              liderando la transformación digital con soluciones innovadoras, seguras y sostenibles
+              que generen valor a largo plazo.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Valores -->
+    <section
+      class="w-full bg-gradient-to-b from-white to-gray-50 px-4 py-16 sm:px-6 md:py-24 lg:px-8"
+    >
+      <div class="mx-auto max-w-6xl">
+        <div class="mb-12 text-center md:mb-16">
+          <h2 class="mb-4 text-3xl font-bold text-gray-800 md:text-4xl lg:text-5xl">
+            Nuestros Valores
+          </h2>
+          <p class="mx-auto max-w-2xl text-lg text-gray-600 md:text-xl">
+            Los principios que guían cada uno de nuestros proyectos
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:gap-8 lg:grid-cols-4">
+          {
+            valores.map((valor) => (
+              <div class="rounded-xl bg-white p-6 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl md:p-8">
+                <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-blue-700">
+                  {valor.icon === "shield" && (
+                    <svg
+                      class="h-7 w-7 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                      />
+                    </svg>
+                  )}
+                  {valor.icon === "lightbulb" && (
+                    <svg
+                      class="h-7 w-7 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                      />
+                    </svg>
+                  )}
+                  {valor.icon === "users" && (
+                    <svg
+                      class="h-7 w-7 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                      />
+                    </svg>
+                  )}
+                  {valor.icon === "rocket" && (
+                    <svg
+                      class="h-7 w-7 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13 10V3L4 14h7v7l9-11h-7z"
+                      />
+                    </svg>
+                  )}
+                </div>
+                <h3 class="mb-3 text-center text-xl font-bold text-gray-800 md:text-2xl">
+                  {valor.title}
+                </h3>
+                <p class="text-center text-sm leading-relaxed text-gray-600 md:text-base">
+                  {valor.description}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Historia -->
+    <section class="w-full px-4 py-16 sm:px-6 md:py-24 lg:px-8">
+      <div class="mx-auto max-w-4xl">
+        <div class="text-center">
+          <h2 class="mb-8 text-3xl font-bold text-gray-800 md:text-4xl lg:text-5xl">
+            Nuestra Historia
+          </h2>
+          <div class="prose prose-lg max-w-none md:prose-xl">
+            <p class="mb-6 text-base leading-relaxed text-gray-700 md:text-lg">
+              <strong>Unidad C</strong> nace con la visión de ser un aliado estratégico para las empresas
+              en su transformación digital. Desde nuestros inicios, nos hemos especializado en brindar
+              soluciones tecnológicas integrales que van desde la consultoría en TI hasta la implementación
+              de sistemas empresariales robustos.
+            </p>
+            <p class="mb-6 text-base leading-relaxed text-gray-700 md:text-lg">
+              Con un equipo de profesionales altamente capacitados y comprometidos, hemos logrado
+              consolidarnos como distribuidores autorizados de <strong>CONTPAQi®</strong> y partners de
+              las principales marcas tecnológicas del mercado.
+            </p>
+            <p class="text-base leading-relaxed text-gray-700 md:text-lg">
+              Nuestro compromiso es proporcionar servicios de calidad que generen valor real a
+              nuestros clientes, manteniéndonos siempre a la vanguardia en tecnología y seguridad
+              informática.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section
+      class="w-full bg-gradient-to-br from-blue-600 to-blue-900 px-4 py-16 text-white sm:px-6 md:py-20 lg:px-8"
+    >
+      <div class="mx-auto max-w-4xl text-center">
+        <div>
+          <h2 class="mb-6 text-3xl font-bold md:text-4xl lg:text-5xl">
+            ¿Listo para transformar tu negocio?
+          </h2>
+          <p class="mx-auto mb-8 max-w-2xl text-lg text-blue-100 md:text-xl">
+            Contáctanos y descubre cómo nuestras soluciones pueden impulsar tu empresa
+          </p>
+          <div class="flex flex-col justify-center gap-4 sm:flex-row">
+            <a
+              href="https://wa.me/5215660000199?text=Hola,%20me%20interesa%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios."
+              target="_blank"
+              rel="noopener noreferrer"
+              class="rounded-lg bg-white px-8 py-4 text-lg font-semibold text-blue-600 shadow-lg transition-colors duration-200 hover:bg-blue-50 hover:shadow-xl"
+            >
+              Contactar por WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

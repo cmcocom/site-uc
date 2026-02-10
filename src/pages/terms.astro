@@ -1,0 +1,207 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const secciones = [
+  {
+    titulo: "1. Aceptación de Términos",
+    contenido:
+      "Al acceder y utilizar los servicios de Unidad C, usted acepta estar sujeto a estos Términos y Condiciones, todas las leyes y regulaciones aplicables, y acepta que es responsable del cumplimiento de las leyes locales aplicables.",
+  },
+  {
+    titulo: "2. Uso del Servicio",
+    contenido:
+      "Nuestros servicios están destinados exclusivamente para uso comercial y profesional. Usted se compromete a utilizar nuestros servicios de manera ética y legal, respetando los derechos de propiedad intelectual y evitando cualquier uso indebido o no autorizado.",
+  },
+  {
+    titulo: "3. Servicios Ofrecidos",
+    contenido:
+      "Unidad C ofrece servicios de consultoría en TI, desarrollo de software, implementación de sistemas empresariales, soluciones de ciberseguridad, y otros servicios tecnológicos especializados según lo acordado en contratos individuales.",
+  },
+  {
+    titulo: "4. Propiedad Intelectual",
+    contenido:
+      "Todo el contenido, materiales, software y documentación proporcionados por Unidad C son propiedad exclusiva de la empresa o sus licenciantes. Queda prohibida la reproducción, distribución o modificación sin autorización expresa por escrito.",
+  },
+  {
+    titulo: "5. Confidencialidad",
+    contenido:
+      "Ambas partes se comprometen a mantener la confidencialidad de toda información sensible compartida durante la prestación de servicios. Esto incluye datos empresariales, estrategias, información técnica y cualquier material considerado confidencial.",
+  },
+  {
+    titulo: "6. Limitación de Responsabilidad",
+    contenido:
+      "Unidad C no será responsable por daños indirectos, incidentales, especiales o consecuentes que resulten del uso o la imposibilidad de usar nuestros servicios, incluso si hemos sido advertidos de la posibilidad de tales daños.",
+  },
+  {
+    titulo: "7. Condiciones de Pago",
+    contenido:
+      "Los términos de pago se establecerán en contratos individuales. El cliente se compromete a realizar los pagos según los plazos acordados. El incumplimiento en los pagos puede resultar en la suspensión temporal de servicios.",
+  },
+  {
+    titulo: "8. Garantías y Soporte",
+    contenido:
+      "Ofrecemos garantía en nuestros servicios según lo especificado en cada contrato. El soporte técnico estará disponible durante el horario comercial. Los tiempos de respuesta varían según el nivel de servicio contratado.",
+  },
+  {
+    titulo: "9. Modificaciones del Servicio",
+    contenido:
+      "Unidad C se reserva el derecho de modificar, suspender o discontinuar cualquier aspecto de los servicios en cualquier momento. Notificaremos a los clientes activos sobre cambios significativos con anticipación razonable.",
+  },
+  {
+    titulo: "10. Terminación del Servicio",
+    contenido:
+      "Cualquiera de las partes puede terminar el servicio mediante notificación por escrito según los términos establecidos en el contrato individual. Unidad C se reserva el derecho de terminar servicios inmediatamente en caso de incumplimiento grave.",
+  },
+  {
+    titulo: "11. Fuerza Mayor",
+    contenido:
+      "Ninguna de las partes será responsable por el incumplimiento de sus obligaciones debido a causas fuera de su control razonable, incluyendo desastres naturales, guerras, actos de terrorismo, pandemias o fallas en servicios de terceros.",
+  },
+  {
+    titulo: "12. Ley Aplicable y Jurisdicción",
+    contenido:
+      "Estos términos se regirán e interpretarán de acuerdo con las leyes de los Estados Unidos Mexicanos. Cualquier disputa se resolverá en los tribunales competentes de la jurisdicción correspondiente.",
+  },
+];
+
+const fechaActual = new Date().toLocaleDateString("es-MX", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<Layout title="Términos y Condiciones - Unidad C">
+  <main class="min-h-screen w-full bg-gradient-to-b from-gray-50 to-white pt-20">
+    <!-- Hero Section -->
+    <section
+      class="relative w-full overflow-hidden bg-gradient-to-br from-gray-800 via-gray-900 to-black py-16 text-white md:py-32"
+    >
+      <div
+        class="absolute inset-0 bg-[url('/images/fondo_hero1.webp')] bg-cover bg-center opacity-5"
+      >
+      </div>
+
+      <div class="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <div
+            class="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md"
+          >
+            <svg
+              class="h-10 w-10 text-orange-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              ></path>
+            </svg>
+          </div>
+
+          <h1 class="mb-4 text-3xl font-bold md:text-4xl lg:text-5xl">Términos y Condiciones</h1>
+          <p class="mx-auto max-w-3xl text-base text-gray-300 md:text-lg">
+            Última actualización: {fechaActual}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Introducción -->
+    <section class="w-full px-4 py-12 sm:px-6 md:py-16 lg:px-8">
+      <div class="mx-auto max-w-4xl">
+        <div class="rounded-r-lg border-l-4 border-blue-600 bg-blue-50 p-6 md:p-8">
+          <div class="flex items-start space-x-4">
+            <svg
+              class="mt-1 h-6 w-6 flex-shrink-0 text-blue-600"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clip-rule="evenodd"></path>
+            </svg>
+            <div>
+              <h2 class="mb-3 text-xl font-bold text-gray-800 md:text-2xl">Importante</h2>
+              <p class="text-sm leading-relaxed text-gray-700 md:text-base">
+                Estos términos y condiciones describen las reglas y regulaciones para el uso de los
+                servicios de <strong>Unidad C</strong>. Al contratar nuestros servicios, usted
+                acepta estos términos en su totalidad. No continúe usando los servicios de Unidad C
+                si no acepta todos los términos y condiciones establecidos en esta página.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Secciones de Términos -->
+    <section class="w-full px-4 py-8 sm:px-6 md:py-12 lg:px-8">
+      <div class="mx-auto max-w-4xl space-y-6 md:space-y-8">
+        {
+          secciones.map((seccion) => (
+            <div class="rounded-xl bg-white p-6 shadow-md transition-shadow duration-300 hover:shadow-lg md:p-8">
+              <h3 class="mb-3 text-lg font-bold text-gray-800 md:mb-4 md:text-xl">
+                {seccion.titulo}
+              </h3>
+              <p class="text-sm leading-relaxed text-gray-700 md:text-base">{seccion.contenido}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Información de Contacto -->
+    <section
+      class="w-full bg-gradient-to-b from-white to-gray-50 px-4 py-12 sm:px-6 md:py-16 lg:px-8"
+    >
+      <div class="mx-auto max-w-4xl">
+        <div
+          class="rounded-2xl bg-gradient-to-br from-blue-600 to-blue-700 p-8 text-white shadow-xl md:p-10"
+        >
+          <h2 class="mb-4 text-2xl font-bold md:text-3xl">
+            ¿Tienes dudas sobre nuestros términos?
+          </h2>
+          <p class="mb-6 text-base text-blue-100 md:text-lg">
+            Si tienes alguna pregunta sobre estos Términos y Condiciones, puedes contactarnos:
+          </p>
+          <div class="space-y-3">
+            <p class="text-base md:text-lg">
+              <strong>Email:</strong>
+              <a
+                href="mailto:info@unidadc.com"
+                class="text-white underline transition-colors hover:text-orange-500"
+              >
+                info@unidadc.com
+              </a>
+            </p>
+            <p class="text-base md:text-lg">
+              <strong>Teléfono:</strong>
+              <a
+                href="tel:+525560000199"
+                class="text-white underline transition-colors hover:text-orange-500"
+              >
+                +52 (55) 6000-0199
+              </a>
+            </p>
+            <p class="text-base md:text-lg">
+              <strong>WhatsApp:</strong>
+              <a
+                href="https://wa.me/5215660000199?text=Hola,%20tengo%20dudas%20sobre%20los%20términos%20y%20condiciones"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-white underline transition-colors hover:text-orange-500"
+              >
+                Enviar mensaje
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

@@ -1,0 +1,40 @@
+{
+  "name": "site-uc-astro",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "lint": "eslint . --ext ts,tsx,astro",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.2.3",
+    "@astrojs/tailwind": "^6.0.0",
+    "astro": "^5.16.11",
+    "framer-motion": "^12.4.7",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^4.0.0",
+    "lucide-react": "^0.474.0",
+    "numero-a-letras": "^1.0.6",
+    "qrious": "^4.0.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-icons": "^5.5.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
+    "@typescript-eslint/eslint-plugin": "^8.21.0",
+    "@typescript-eslint/parser": "^8.21.0",
+    "eslint": "^9.20.1",
+    "prettier": "^3.8.1",
+    "prettier-plugin-astro": "^0.14.1",
+    "typescript": "^5.7.3"
+  }
+}

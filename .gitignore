@@ -1,0 +1,35 @@
+# Dependencias
+node_modules/
+
+# Build
+dist/
+
+# Astro cache
+.astro/
+
+# Variables de entorno
+.env
+.env.*
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/*
+!.vscode/settings.json
+.idea/
+
+# Claude Code
+.claude/
+
+# Archivos temporales de depuracion
+temp/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Carpeta legacy
+proyecto_nextjs/
+backup_*/
