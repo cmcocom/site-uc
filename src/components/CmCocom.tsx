@@ -1,7 +1,7 @@
 "use client";
 
-import { FaLinkedin } from "react-icons/fa";
 import React, { useState } from "react";
+import { Linkedin } from "lucide-react";
 
 interface SocialLinkProps {
   href: string;
@@ -189,7 +189,7 @@ export default function CmCocom() {
                 <div className="mb-6 flex justify-center space-x-4">
                   <SocialLink
                     href="https://www.linkedin.com/in/cmcocomti"
-                    icon={<FaLinkedin />}
+                    icon={<Linkedin className="h-5 w-5" />}
                     label="LinkedIn"
                   />
                 </div>

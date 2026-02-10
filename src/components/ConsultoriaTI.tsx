@@ -436,8 +436,8 @@ const ConsultoriaTecnologica = () => {
         if (parsed.sistemas) setSistemas(parsed.sistemas);
         if (parsed.ponderacion) setPonderacion(parsed.ponderacion);
       }
-    } catch (error) {
-      console.error("Error al cargar datos guardados:", error);
+    } catch {
+      // Failed to load saved data
     }
   }, []);
 
@@ -488,8 +488,8 @@ const ConsultoriaTecnologica = () => {
       };
       localStorage.setItem("consultoriaTI_integrada", JSON.stringify(dataToSave));
       setLastSaved(new Date());
-    } catch (error) {
-      console.error("Error al guardar datos:", error);
+    } catch {
+      // Failed to save data
     }
   }, [
     clienteInfo,
@@ -879,8 +879,7 @@ const ConsultoriaTecnologica = () => {
         printWindow.document.close();
         setTimeout(() => printWindow.print(), 250);
       }
-    } catch (error) {
-      console.error("Error al generar el reporte:", error);
+    } catch {
       alert("Error al generar el reporte. Por favor, intente de nuevo.");
     }
   };

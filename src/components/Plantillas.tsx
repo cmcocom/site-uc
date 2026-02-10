@@ -3,6 +3,14 @@
 import { useState } from "react";
 import type { FormEvent, ChangeEvent } from "react";
 
+const escapeHtml = (str: string): string =>
+  str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
 interface FormData {
   clientName: string;
   clientEmail: string;
@@ -44,6 +52,9 @@ export default function Plantillas() {
   // Email content templates
   const getEmailContent = (): { title: string; mainContent: string } => {
     const { taskType, clientName, productName, additionalInfo } = formData;
+    const safeName = escapeHtml(clientName);
+    const safeProduct = escapeHtml(productName);
+    const safeInfo = escapeHtml(additionalInfo);
 
     let title = "";
     let mainContent = "";
@@ -52,9 +63,9 @@ export default function Plantillas() {
       case "quote":
         title = "Cotización - Unidad C";
         mainContent = `
-          <p>Estimado/a ${clientName},</p>
-          <p>Agradecemos su interés en nuestros servicios. Adjuntamos la cotización solicitada para <strong>${productName}</strong>.</p>
-          ${additionalInfo ? `<p>${additionalInfo}</p>` : ""}
+          <p>Estimado/a ${safeName},</p>
+          <p>Agradecemos su interés en nuestros servicios. Adjuntamos la cotización solicitada para <strong>${safeProduct}</strong>.</p>
+          ${safeInfo ? `<p>${safeInfo}</p>` : ""}
           <p>Quedamos a sus órdenes para cualquier duda o aclaración.</p>
         `;
         break;
@@ -62,9 +73,9 @@ export default function Plantillas() {
       case "payment":
         title = "Confirmación de Pago - Unidad C";
         mainContent = `
-          <p>Estimado/a ${clientName},</p>
-          <p>Le confirmamos que hemos recibido su pago correspondiente a <strong>${productName}</strong>.</p>
-          ${additionalInfo ? `<p>${additionalInfo}</p>` : ""}
+          <p>Estimado/a ${safeName},</p>
+          <p>Le confirmamos que hemos recibido su pago correspondiente a <strong>${safeProduct}</strong>.</p>
+          ${safeInfo ? `<p>${safeInfo}</p>` : ""}
           <p>Gracias por su confianza en nuestros servicios.</p>
         `;
         break;
@@ -72,9 +83,9 @@ export default function Plantillas() {
       case "license":
         title = "Licencia - Unidad C";
         mainContent = `
-          <p>Estimado/a ${clientName},</p>
-          <p>Adjuntamos la información de la licencia para <strong>${productName}</strong>.</p>
-          ${additionalInfo ? `<p>${additionalInfo}</p>` : ""}
+          <p>Estimado/a ${safeName},</p>
+          <p>Adjuntamos la información de la licencia para <strong>${safeProduct}</strong>.</p>
+          ${safeInfo ? `<p>${safeInfo}</p>` : ""}
           <p>Para activar su licencia, siga las instrucciones incluidas en el archivo adjunto.</p>
         `;
         break;
@@ -82,16 +93,16 @@ export default function Plantillas() {
       case "update":
         title = "Actualización - Unidad C";
         mainContent = `
-          <p>Estimado/a ${clientName},</p>
-          <p>Le informamos que la actualización de <strong>${productName}</strong> se ha completado exitosamente.</p>
-          ${additionalInfo ? `<p>${additionalInfo}</p>` : ""}
+          <p>Estimado/a ${safeName},</p>
+          <p>Le informamos que la actualización de <strong>${safeProduct}</strong> se ha completado exitosamente.</p>
+          ${safeInfo ? `<p>${safeInfo}</p>` : ""}
           <p>Si requiere asistencia adicional, no dude en contactarnos.</p>
         `;
         break;
 
       default:
         title = "Unidad C";
-        mainContent = `<p>Estimado/a ${clientName},</p>`;
+        mainContent = `<p>Estimado/a ${safeName},</p>`;
     }
 
     return { title, mainContent };

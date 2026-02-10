@@ -163,8 +163,8 @@ export default function GenPass() {
         document.execCommand("copy");
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
-      } catch (err) {
-        console.error("Error al copiar: ", err);
+      } catch {
+        // Copy failed silently
       }
       document.body.removeChild(textArea);
     }

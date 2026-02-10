@@ -89,7 +89,7 @@ export default function Cotizacion() {
   useEffect(() => {
     const fetchBanxicoRate = async () => {
       try {
-        const token = "b30025859cf0d83719bfedbe2779b3efc325f22ebed53fdcfaa32ba357ec6746";
+        const token = import.meta.env.PUBLIC_BANXICO_TOKEN || "b30025859cf0d83719bfedbe2779b3efc325f22ebed53fdcfaa32ba357ec6746";
         const today = new Date();
         const threeDaysAgo = new Date(today);
         threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
@@ -121,8 +121,8 @@ export default function Cotizacion() {
           const rate = parseFloat(latestData.dato);
           setExchangeRate(rate + 0.15);
         }
-      } catch (err) {
-        console.error("Error fetching exchange rate:", err);
+      } catch {
+        // Exchange rate fetch failed silently
       }
     };
 
@@ -395,8 +395,8 @@ export default function Cotizacion() {
             }
           }
         }
-      } catch (err) {
-        console.warn("No se pudo ocultar el T.C.:", err);
+      } catch {
+        // T.C. hiding failed silently
       }
 
       applyTypographyToAll(elementClone, {
@@ -616,7 +616,6 @@ export default function Cotizacion() {
         URL.revokeObjectURL(pdfUrl);
       }, 1000);
     } catch (error) {
-      console.error("Error al generar PDF cliente:", error);
       alert("Error al generar el PDF. Por favor, intente nuevamente: " + (error as Error).message);
     } finally {
       if (elementClone && elementClone.parentNode) {
@@ -690,8 +689,8 @@ export default function Cotizacion() {
             }
           }
         }
-      } catch (err) {
-        console.warn("No se pudo ocultar el T.C.:", err);
+      } catch {
+        // T.C. hiding failed silently
       }
 
       applyTypographyToAll(elementClone, {
@@ -872,7 +871,6 @@ export default function Cotizacion() {
         URL.revokeObjectURL(pdfUrl);
       }, 1000);
     } catch (error) {
-      console.error("Error al generar PDF completo:", error);
       alert("Error al generar el PDF. Por favor, intente nuevamente: " + (error as Error).message);
     } finally {
       if (elementClone && elementClone.parentNode) {

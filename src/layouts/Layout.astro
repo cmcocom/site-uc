@@ -3,23 +3,53 @@ import "../styles/globals.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { ViewTransitions } from "astro:transitions";
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title = "Unidad C - Soluciones Tecnológicas",
+  description = "Unidad C - Soluciones tecnológicas y de consultoría para tu negocio",
+  ogImage = "/images/logo_uc_orange_hd.svg",
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, "https://unidadc.com");
 ---
 
 <!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="description"
-      content="Unidad C - Soluciones tecnológicas y de consultoría para tu negocio"
-    />
+    <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="canonical" href={canonicalURL.href} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL.href} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, "https://unidadc.com").href} />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:site_name" content="Unidad C" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, "https://unidadc.com").href} />
+
     <ViewTransitions />
-    <title>Unidad C - Soluciones Tecnológicas</title>
+    <title>{title}</title>
   </head>
   <body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 min-h-screen">
     <Header />
@@ -41,138 +71,85 @@ import { ViewTransitions } from "astro:transitions";
       </svg>
     </a>
 
-    <script>
-      // Banxico Exchange Rate functionality
+    <script is:inline define:vars={{ banxicoToken: import.meta.env.BANXICO_TOKEN || "b30025859cf0d83719bfedbe2779b3efc325f22ebed53fdcfaa32ba357ec6746" }}>
       const fetchBanxicoRate = async () => {
         try {
-          const token = "b30025859cf0d83719bfedbe2779b3efc325f22ebed53fdcfaa32ba357ec6746";
-
-          if (!token) {
-            throw new Error("Token no configurado");
-          }
+          const token = banxicoToken;
+          if (!token) return;
 
           const today = new Date();
           const threeDaysAgo = new Date(today);
           threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
 
-const formatDate = (date: Date) => {
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, "0");
-        const day = String(date.getDate()).padStart(2, "0");
-        return `${year}-${month}-${day}`;
-      };
+          const formatDate = (date) => {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, "0");
+            const day = String(date.getDate()).padStart(2, "0");
+            return `${year}-${month}-${day}`;
+          };
 
           const url = `https://www.banxico.org.mx/SieAPIRest/service/v1/series/SF43718/datos/${formatDate(threeDaysAgo)}/${formatDate(today)}?token=${token}`;
-
-          console.log("Fetching Banxico data from:", url);
-
           const response = await fetch(url);
 
-          if (!response.ok) {
-            console.error("Banxico API response:", response.status, response.statusText);
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
+          if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
           const data = await response.json();
-          console.log("Banxico data:", data);
 
-          if (
-            data.bmx &&
-            data.bmx.series &&
-            data.bmx.series[0] &&
-            data.bmx.series[0].datos &&
-            data.bmx.series[0].datos.length > 0
-          ) {
+          if (data.bmx?.series?.[0]?.datos?.length > 0) {
             const latestData = data.bmx.series[0].datos[data.bmx.series[0].datos.length - 1];
             const rate = parseFloat(latestData.dato).toFixed(4);
-
             const rateElement = document.getElementById("header-rate-value");
             const dateElement = document.getElementById("header-date-value");
-
             if (rateElement) rateElement.textContent = rate;
             if (dateElement) dateElement.textContent = latestData.fecha;
-
-            console.log("Rate updated:", rate, latestData.fecha);
           } else {
-            // Intentar con más días atrás
             const weekAgo = new Date(today);
             weekAgo.setDate(weekAgo.getDate() - 7);
-
             const weekUrl = `https://www.banxico.org.mx/SieAPIRest/service/v1/series/SF43718/datos/${formatDate(weekAgo)}/${formatDate(today)}?token=${token}`;
 
             try {
               const weekResponse = await fetch(weekUrl);
-
               if (weekResponse.ok) {
                 const weekData = await weekResponse.json();
-                if (
-                  weekData.bmx &&
-                  weekData.bmx.series &&
-                  weekData.bmx.series[0] &&
-                  weekData.bmx.series[0].datos &&
-                  weekData.bmx.series[0].datos.length > 0
-                ) {
+                if (weekData.bmx?.series?.[0]?.datos?.length > 0) {
                   const availableData = weekData.bmx.series[0].datos;
                   const latestData = availableData[availableData.length - 1];
                   const rate = parseFloat(latestData.dato).toFixed(4);
-
                   const rateElement = document.getElementById("header-rate-value");
                   const dateElement = document.getElementById("header-date-value");
-
                   if (rateElement) rateElement.textContent = rate;
                   if (dateElement) dateElement.textContent = latestData.fecha;
-
-                  console.log("Rate updated from week data:", rate, latestData.fecha);
                   return;
                 }
               }
-            } catch (weekError) {
-              console.error("Week attempt failed:", weekError);
-            }
+            } catch { /* silencioso */ }
 
-            // Si aún no hay datos
             const rateElement = document.getElementById("header-rate-value");
             if (rateElement) {
               rateElement.textContent = "Sin datos";
               rateElement.parentElement?.classList.add("text-red-400");
             }
-            console.error("No data available from Banxico API");
           }
-        } catch (err) {
-          console.error("Error fetching exchange rate:", err);
+        } catch {
           const rateElement = document.getElementById("header-rate-value");
           const container = rateElement?.parentElement;
-
           if (rateElement) rateElement.textContent = "Error";
           if (container) container.classList.add("text-red-400");
         }
       };
 
-      // Variable global para el interval
-      let banxicoInterval: number | undefined;
+      let banxicoInterval;
 
-      // Función para inicializar el tipo de cambio
       const initBanxicoRate = () => {
         const rateElement = document.getElementById("header-rate-value");
-
         if (rateElement) {
-          // Limpiar interval anterior si existe
-          if (banxicoInterval) {
-            clearInterval(banxicoInterval);
-          }
-
-          // Fetch inmediato
+          if (banxicoInterval) clearInterval(banxicoInterval);
           fetchBanxicoRate();
-
-          // Refrescar cada 30 minutos
           banxicoInterval = setInterval(fetchBanxicoRate, 30 * 60 * 1000);
         }
       };
 
-      // Ejecutar en carga inicial
       initBanxicoRate();
-
-      // Ejecutar después de cada transición de página (View Transitions)
       document.addEventListener("astro:page-load", initBanxicoRate);
     </script>
   </body>

@@ -22,7 +22,6 @@ export default function KnowIp({ variant = "page", className = "" }: KnowIpProps
         setError(null);
       } catch (err) {
         if (err instanceof Error && err.name !== "AbortError") {
-          console.error("Error al obtener IP pública:", err);
           setError("No se pudo obtener la IP");
         }
       }
@@ -41,8 +40,7 @@ export default function KnowIp({ variant = "page", className = "" }: KnowIpProps
         const data = await res.json();
         setIp(data.ip);
         setError(null);
-      } catch (err) {
-        console.error("Error al obtener IP pública:", err);
+      } catch {
         setError("No se pudo obtener la IP");
       }
     };
@@ -69,8 +67,8 @@ export default function KnowIp({ variant = "page", className = "" }: KnowIpProps
         document.execCommand("copy");
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
-      } catch (err) {
-        console.error("Error al copiar: ", err);
+      } catch {
+        // Copy failed silently
       }
       document.body.removeChild(textArea);
     }

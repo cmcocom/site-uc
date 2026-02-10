@@ -33,6 +33,7 @@ export default [
         FileReader: "readonly",
         AbortController: "readonly",
         // DOM types
+        Document: "readonly",
         HTMLElement: "readonly",
         HTMLDivElement: "readonly",
         HTMLInputElement: "readonly",
