@@ -1,12 +1,90 @@
-# https://www.robotstxt.org/robotstxt.html
+# https://unidadc.com/robots.txt - Última actualización: 2026-02-10
+# For more info: https://www.robotstxt.org/robotstxt.html
+
+# ========================================
+# SITEMAP (IMPORTANTE SEO)
+# ========================================
+Sitemap: https://unidadc.com/sitemap-index.xml
+Sitemap: https://unidadc.com/sitemap-pages.xml
+
+# ========================================
+# REGLAS GENERALES - Todos los bots
+# ========================================
 User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+Disallow: /*.pdf$
+Disallow: /search/
+Noindex: /search/
 
-# Google Bot
+# ========================================
+# GOOGLE - Tratamiento especial
+# ========================================
 User-agent: Googlebot
+User-agent: Googlebot-Image
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Crawl-delay: 1
+
+# ========================================
+# BING/YAHOO
+# ========================================
+User-agent: Bingbot
+Allow: /
+Disallow: /api/
+
+User-agent: Slurp
+Allow: /
+Disallow: /api/
+
+# ========================================
+# BLOQUEAR AI SCRAPERS 2026 (IMPORTANTE)
+# ========================================
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Grok*
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: xAI-Grok
+Disallow: /
+
+# ========================================
+# BOTs SOCIALES - Permitir previews
+# ========================================
+User-agent: Twitterbot
 Allow: /
 
-# Sitemap
-Sitemap: https://unidadc.com/sitemap.xml
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# ========================================
+# ARCHIVOS SENSIBLES
+# ========================================
+User-agent: *
+Disallow: /*.log
+Disallow: /.env
+Disallow: /wp-admin/
+Disallow: /cgi-bin/
+
+# ========================================
+# Crawl Budget Optimization
+# ========================================
+User-agent: *
+Crawl-delay: 2
