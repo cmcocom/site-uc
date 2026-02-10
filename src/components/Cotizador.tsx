@@ -85,40 +85,16 @@ export default function Cotizacion() {
   // Añadimos el estado para el ID
   const [quoteId, setQuoteId] = useState(() => getSimpleQuoteId());
 
-  // Fetch exchange rate from Banxico
+  // Fetch exchange rate from local API proxy
   useEffect(() => {
     const fetchBanxicoRate = async () => {
       try {
-        const token = import.meta.env.PUBLIC_BANXICO_TOKEN || "b30025859cf0d83719bfedbe2779b3efc325f22ebed53fdcfaa32ba357ec6746";
-        const today = new Date();
-        const threeDaysAgo = new Date(today);
-        threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
-
-        const formatDate = (date: Date) => {
-          const year = date.getFullYear();
-          const month = String(date.getMonth() + 1).padStart(2, "0");
-          const day = String(date.getDate()).padStart(2, "0");
-          return `${year}-${month}-${day}`;
-        };
-
-        const url = `https://www.banxico.org.mx/SieAPIRest/service/v1/series/SF43718/datos/${formatDate(threeDaysAgo)}/${formatDate(today)}?token=${token}`;
-        const response = await fetch(url);
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        const response = await fetch("/api/exchange-rate");
+        if (!response.ok) throw new Error("API error");
 
         const data = await response.json();
-
-        if (
-          data.bmx &&
-          data.bmx.series &&
-          data.bmx.series[0] &&
-          data.bmx.series[0].datos &&
-          data.bmx.series[0].datos.length > 0
-        ) {
-          const latestData = data.bmx.series[0].datos[data.bmx.series[0].datos.length - 1];
-          const rate = parseFloat(latestData.dato);
+        if (data.rate) {
+          const rate = parseFloat(data.rate);
           setExchangeRate(rate + 0.15);
         }
       } catch {

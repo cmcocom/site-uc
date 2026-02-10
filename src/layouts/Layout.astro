@@ -71,59 +71,19 @@ const canonicalURL = new URL(Astro.url.pathname, "https://unidadc.com");
       </svg>
     </a>
 
-    <script is:inline define:vars={{ banxicoToken: import.meta.env.BANXICO_TOKEN || "b30025859cf0d83719bfedbe2779b3efc325f22ebed53fdcfaa32ba357ec6746" }}>
+    <script is:inline>
       const fetchBanxicoRate = async () => {
         try {
-          const token = banxicoToken;
-          if (!token) return;
-
-          const today = new Date();
-          const threeDaysAgo = new Date(today);
-          threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
-
-          const formatDate = (date) => {
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, "0");
-            const day = String(date.getDate()).padStart(2, "0");
-            return `${year}-${month}-${day}`;
-          };
-
-          const url = `https://www.banxico.org.mx/SieAPIRest/service/v1/series/SF43718/datos/${formatDate(threeDaysAgo)}/${formatDate(today)}?token=${token}`;
-          const response = await fetch(url);
-
-          if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+          const response = await fetch("/api/exchange-rate");
+          if (!response.ok) throw new Error("API error");
 
           const data = await response.json();
-
-          if (data.bmx?.series?.[0]?.datos?.length > 0) {
-            const latestData = data.bmx.series[0].datos[data.bmx.series[0].datos.length - 1];
-            const rate = parseFloat(latestData.dato).toFixed(4);
+          if (data.rate) {
             const rateElement = document.getElementById("header-rate-value");
             const dateElement = document.getElementById("header-date-value");
-            if (rateElement) rateElement.textContent = rate;
-            if (dateElement) dateElement.textContent = latestData.fecha;
+            if (rateElement) rateElement.textContent = data.rate;
+            if (dateElement) dateElement.textContent = data.fecha;
           } else {
-            const weekAgo = new Date(today);
-            weekAgo.setDate(weekAgo.getDate() - 7);
-            const weekUrl = `https://www.banxico.org.mx/SieAPIRest/service/v1/series/SF43718/datos/${formatDate(weekAgo)}/${formatDate(today)}?token=${token}`;
-
-            try {
-              const weekResponse = await fetch(weekUrl);
-              if (weekResponse.ok) {
-                const weekData = await weekResponse.json();
-                if (weekData.bmx?.series?.[0]?.datos?.length > 0) {
-                  const availableData = weekData.bmx.series[0].datos;
-                  const latestData = availableData[availableData.length - 1];
-                  const rate = parseFloat(latestData.dato).toFixed(4);
-                  const rateElement = document.getElementById("header-rate-value");
-                  const dateElement = document.getElementById("header-date-value");
-                  if (rateElement) rateElement.textContent = rate;
-                  if (dateElement) dateElement.textContent = latestData.fecha;
-                  return;
-                }
-              }
-            } catch { /* silencioso */ }
-
             const rateElement = document.getElementById("header-rate-value");
             if (rateElement) {
               rateElement.textContent = "Sin datos";

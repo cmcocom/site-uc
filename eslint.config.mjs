@@ -32,6 +32,7 @@ export default [
         fetch: "readonly",
         FileReader: "readonly",
         AbortController: "readonly",
+        Response: "readonly",
         // DOM types
         Document: "readonly",
         HTMLElement: "readonly",
