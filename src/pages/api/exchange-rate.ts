@@ -5,8 +5,11 @@ import type { APIRoute } from "astro";
 export const GET: APIRoute = async () => {
   const token = import.meta.env.BANXICO_TOKEN;
 
+  console.log("BANXICO_TOKEN exists:", !!token);
+  console.log("BANXI_TOKEN value:", token ? "***" + token.slice(-4) : "undefined");
+
   if (!token) {
-    return new Response(JSON.stringify({ error: "Token no configurado" }), {
+    return new Response(JSON.stringify({ error: "Token no configurado", hasToken: false }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
     });
