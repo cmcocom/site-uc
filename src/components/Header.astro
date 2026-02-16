@@ -133,25 +133,32 @@ import { motion } from "framer-motion";
     const mobileToolsButton = document.getElementById("mobile-tools-button");
     const mobileToolsMenu = document.getElementById("mobile-tools-menu");
 
-    function toggleMobileMenu() {
-      mobileMenu.classList.toggle("opacity-0");
-      mobileMenu.classList.toggle("invisible");
-      mobileToolsMenu.classList.add("hidden");
+    function openMobileMenu() {
+      mobileMenu?.classList.remove("opacity-0", "invisible");
+      mobileToolsMenu?.classList.add("hidden");
+    }
+
+    function closeMobileMenu() {
+      mobileMenu?.classList.add("opacity-0", "invisible");
+      mobileToolsMenu?.classList.add("hidden");
     }
 
     function toggleMobileTools() {
-      mobileToolsMenu.classList.toggle("hidden");
+      mobileToolsMenu?.classList.toggle("hidden");
     }
 
-    mobileMenuButton?.addEventListener("click", toggleMobileMenu);
+    mobileMenuButton?.addEventListener("click", () => {
+      if (mobileMenu?.classList.contains("invisible")) {
+        openMobileMenu();
+      } else {
+        closeMobileMenu();
+      }
+    });
     mobileToolsButton?.addEventListener("click", toggleMobileTools);
 
     // Close mobile menu when clicking on links
     mobileMenu?.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        mobileMenu.classList.add("opacity-0", "invisible");
-        mobileToolsMenu.classList.add("hidden");
-      });
+      link.addEventListener("click", closeMobileMenu);
     });
   });
 </script>
