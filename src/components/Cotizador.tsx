@@ -83,7 +83,7 @@ export default function Cotizacion() {
   const [moneda, setMoneda] = useState<"MXN" | "USD">("MXN");
 
   // Añadimos el estado para el ID
-  const [quoteId, setQuoteId] = useState(() => getSimpleQuoteId());
+  const [quoteId, setQuoteId] = useState("");
 
   // Fetch exchange rate from local API proxy
   useEffect(() => {
@@ -112,12 +112,13 @@ export default function Cotizacion() {
   }, [exchangeRate]);
 
   useEffect(() => {
-    // Establecer la fecha actual por defecto
+    // Establecer la fecha actual y el ID de cotización
     const today = new Date().toISOString().split("T")[0];
     setClientData((prev) => ({
       ...prev,
       fecha: today,
     }));
+    setQuoteId(getSimpleQuoteId());
   }, []);
 
   // Estado para los productos

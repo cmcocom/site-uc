@@ -104,10 +104,10 @@ export default function KnowIp({ variant = "page", className = "" }: KnowIpProps
               <p
                 aria-live="polite"
                 onClick={copyToClipboard}
-                className="mb-4 cursor-pointer select-all font-mono text-4xl font-bold tracking-wider text-blue-600 transition-colors hover:text-blue-700 md:text-5xl"
+                className="mb-4 cursor-pointer select-all font-mono text-3xl font-bold tracking-wider text-blue-600 transition-colors hover:text-blue-700 md:text-4xl lg:text-5xl"
                 title="Clic para copiar"
               >
-                {error ? error : ip ?? "Cargando..."}
+                {error ? error : (ip ?? "Cargando...")}
               </p>
               {ip && !error && (
                 <button
@@ -147,7 +147,7 @@ export default function KnowIp({ variant = "page", className = "" }: KnowIpProps
         className="cursor-pointer text-2xl font-bold text-blue-600 hover:text-blue-700"
         title="Clic para copiar"
       >
-        {error ? error : ip ?? "Cargando..."}
+        {error ? error : (ip ?? "Cargando...")}
       </p>
       {ip && !error && (
         <button
