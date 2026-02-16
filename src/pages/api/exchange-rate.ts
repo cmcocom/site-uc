@@ -2,11 +2,8 @@ export const prerender = false;
 
 import type { APIRoute } from "astro";
 
-export const GET: APIRoute = async () => {
-  const token = import.meta.env.BANXICO_TOKEN;
-
-  console.log("BANXICO_TOKEN exists:", !!token);
-  console.log("BANXI_TOKEN value:", token ? "***" + token.slice(-4) : "undefined");
+export const GET: APIRoute = async (context) => {
+  const token = (context.locals as any).runtime?.env?.BANXICO_TOKEN || import.meta.env.BANXICO_TOKEN;
 
   if (!token) {
     return new Response(JSON.stringify({ error: "Token no configurado", hasToken: false }), {
