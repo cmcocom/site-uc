@@ -118,7 +118,7 @@ export default function Cotizacion() {
       ...prev,
       fecha: today,
     }));
-    setQuoteId(getSimpleQuoteId());
+    setQuoteId(getSimpleQuoteId(Math.floor(Math.random() * 999)));
   }, []);
 
   // Estado para los productos
@@ -885,8 +885,15 @@ export default function Cotizacion() {
   }, [productos, calcularTotalesOriginales, convertirAMonedaCliente]);
 
   const cantidadEnLetras = useMemo(() => {
-    return NumerosALetras(totales.totalRounded);
-  }, [totales.totalRounded]);
+    const texto = NumerosALetras(totales.totalRounded);
+    if (moneda === "USD") {
+      return texto
+        .replace("Pesos", "Dólares")
+        .replace("Peso", "Dólar")
+        .replace(/\/100 M\.N\./g, "/100 USD");
+    }
+    return texto;
+  }, [totales.totalRounded, moneda]);
 
   const currency = moneda === "USD" ? "USD" : "MXN";
   const locale = moneda === "USD" ? "en-US" : "es-MX";
