@@ -163,9 +163,9 @@ export default function CmCocom() {
       <section className="relative flex h-[36vh] items-center justify-center bg-[#003087] text-center text-white shadow-lg md:h-[28vh]">
         <div className="absolute inset-0 mx-auto max-w-7xl px-4 pt-28 md:pt-28">
           <div className="relative z-10">
-            <h2 className="mb-3 text-3xl font-bold text-white md:mb-4 md:text-4xl">
+            <h1 className="mb-3 text-3xl font-bold text-white md:mb-4 md:text-4xl">
               Cristian Miguel
-            </h2>
+            </h1>
             <p className="mx-auto max-w-2xl px-4 text-lg text-gray-200 md:text-xl">
               Ingeniero en Sistemas Computacionales
             </p>

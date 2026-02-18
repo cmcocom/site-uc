@@ -292,7 +292,7 @@ export default function Plantillas() {
                       <br />
                       Teléfono: 566 000 0199
                       <br />
-                      <a href="http://www.unidadc.com" className="text-blue-600 hover:underline">
+                      <a href="https://www.unidadc.com" className="text-blue-600 hover:underline">
                         www.unidadc.com
                       </a>
                     </p>

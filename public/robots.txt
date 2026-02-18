@@ -4,8 +4,7 @@
 # ========================================
 # SITEMAP (IMPORTANTE SEO)
 # ========================================
-Sitemap: https://unidadc.com/sitemap-index.xml
-Sitemap: https://unidadc.com/sitemap-pages.xml
+Sitemap: https://unidadc.com/sitemap.xml
 
 # ========================================
 # REGLAS GENERALES - Todos los bots
@@ -18,7 +17,6 @@ Disallow: /private/
 Disallow: /temp/
 Disallow: /*.pdf$
 Disallow: /search/
-Noindex: /search/
 
 # ========================================
 # GOOGLE - Tratamiento especial

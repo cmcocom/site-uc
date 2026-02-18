@@ -188,7 +188,11 @@ export default function GenPass() {
         color: "white",
       }}
     >
-      <div className="mx-auto mt-28 flex w-full max-w-6xl flex-col gap-6 px-4 lg:flex-row">
+      <div className="mx-auto mt-28 w-full max-w-6xl px-4">
+        <h1 className="mb-6 text-center text-3xl font-bold text-white md:text-4xl">
+          Generador de Contrasenas
+        </h1>
+        <div className="flex w-full flex-col gap-6 lg:flex-row">
         {/* Columna izquierda: Opciones */}
         <div className="flex w-full flex-col space-y-4 rounded-xl border bg-white p-6 text-black shadow-md lg:w-1/2">
           {/* Auto Secure Option */}
@@ -402,6 +406,7 @@ export default function GenPass() {
               <p className="text-lg">La contraseña generada aparecerá aquí</p>
             </div>
           )}
+        </div>
         </div>
       </div>
     </div>
