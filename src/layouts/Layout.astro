@@ -105,19 +105,24 @@ const canonicalURL = new URL(Astro.url.pathname, "https://unidadc.com");
         }
       };
 
-      let banxicoInterval;
+      const w = window;
+      const BANXICO_INTERVAL_KEY = "__ucBanxicoInterval";
+      const BANXICO_BOUND_KEY = "__ucBanxicoPageLoadBound";
 
       const initBanxicoRate = () => {
         const rateElement = document.getElementById("header-rate-value");
         if (rateElement) {
-          if (banxicoInterval) clearInterval(banxicoInterval);
+          if (w[BANXICO_INTERVAL_KEY]) clearInterval(w[BANXICO_INTERVAL_KEY]);
           fetchBanxicoRate();
-          banxicoInterval = setInterval(fetchBanxicoRate, 30 * 60 * 1000);
+          w[BANXICO_INTERVAL_KEY] = setInterval(fetchBanxicoRate, 30 * 60 * 1000);
         }
       };
 
       initBanxicoRate();
-      document.addEventListener("astro:page-load", initBanxicoRate);
+      if (!w[BANXICO_BOUND_KEY]) {
+        document.addEventListener("astro:page-load", initBanxicoRate);
+        w[BANXICO_BOUND_KEY] = true;
+      }
     </script>
   </body>
 </html>

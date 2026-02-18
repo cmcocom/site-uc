@@ -58,6 +58,21 @@ h6 {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
+.uc-hero-enter {
+  animation: uc-fade-zoom-in 900ms ease-out both;
+}
+
+@keyframes uc-fade-zoom-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -81,6 +96,12 @@ h6 {
   .container {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .uc-hero-enter {
+    animation: none;
   }
 }
 

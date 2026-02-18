@@ -1,0 +1,17 @@
+{
+  "defaultGzipKb": 90,
+  "routes": {
+    "/": 8,
+    "/404": 8,
+    "/aboutus": 8,
+    "/pprivacy": 8,
+    "/terms": 8,
+    "/cotizador": 85,
+    "/consultoriati": 86,
+    "/licencias": 80,
+    "/cmcocom": 80,
+    "/genpass": 75,
+    "/plantillas": 75,
+    "/knowip": 74
+  }
+}
