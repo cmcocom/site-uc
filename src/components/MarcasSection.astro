@@ -1,5 +1,17 @@
 ---
-
+const logos = [
+  { src: "/marcas/aws.webp", alt: "AWS", href: "https://aws.amazon.com/" },
+  { src: "/marcas/contpaqi.webp", alt: "CONTPAQi", href: "https://www.contpaqi.com/" },
+  { src: "/marcas/dahua.webp", alt: "Dahua", href: "https://www.dahuasecurity.com/" },
+  { src: "/marcas/dell.webp", alt: "Dell", href: "https://www.dell.com/" },
+  { src: "/marcas/gstream.webp", alt: "G-Stream", href: "https://www.grandstream.com/" },
+  { src: "/marcas/hikvision.webp", alt: "Hikvision", href: "https://www.hikvision.com/" },
+  { src: "/marcas/ibmcloud.webp", alt: "IBM Cloud", href: "https://www.ibm.com/cloud" },
+  { src: "/marcas/lenovo.webp", alt: "Lenovo", href: "https://www.lenovo.com/" },
+  { src: "/marcas/microso.webp", alt: "Microsoft", href: "https://www.microsoft.com/" },
+  { src: "/marcas/tplink.webp", alt: "TP-Link", href: "https://www.tp-link.com/" },
+  { src: "/marcas/ubiquiti.webp", alt: "Ubiquiti", href: "https://ui.com/" },
+];
 ---
 
 <section
@@ -9,81 +21,77 @@
     <h2 class="mb-8 text-center text-3xl font-bold text-gray-800 md:mb-12 md:text-4xl">
       Marcas que Confían en Nosotros
     </h2>
-    <div class="relative overflow-hidden">
-      <div class="flex space-x-8 animate-scroll">
-        <!-- Logos reales de marcas -->
-        <img src="/marcas/aws.webp" alt="AWS" class="h-16 w-32 object-contain opacity-70" />
-        <img
-          src="/marcas/contpaqi.webp"
-          alt="CONTPAQi"
-          class="h-16 w-32 object-contain opacity-70"
-        />
-        <img src="/marcas/dahua.webp" alt="Dahua" class="h-16 w-32 object-contain opacity-70" />
-        <img src="/marcas/dell.webp" alt="Dell" class="h-16 w-32 object-contain opacity-70" />
-        <img
-          src="/marcas/gstream.webp"
-          alt="G-Stream"
-          class="h-16 w-32 object-contain opacity-70"
-        />
-        <img
-          src="/marcas/hikvision.webp"
-          alt="Hikvision"
-          class="h-16 w-32 object-contain opacity-70"
-        />
-        <img
-          src="/marcas/ibmcloud.webp"
-          alt="IBM Cloud"
-          class="h-16 w-32 object-contain opacity-70"
-        />
-        <img src="/marcas/lenovo.webp" alt="Lenovo" class="h-16 w-32 object-contain opacity-70" />
-        <img
-          src="/marcas/microso.webp"
-          alt="Microsoft"
-          class="h-16 w-32 object-contain opacity-70"
-        />
-        <img src="/marcas/tplink.webp" alt="TP-Link" class="h-16 w-32 object-contain opacity-70" />
-        <img
-          src="/marcas/ubiquiti.webp"
-          alt="Ubiquiti"
-          class="h-16 w-32 object-contain opacity-70"
-        />
-        <!-- Duplicados para scroll infinito -->
-        <img src="/marcas/aws.webp" alt="AWS" class="h-16 w-32 object-contain opacity-70" />
-        <img
-          src="/marcas/contpaqi.webp"
-          alt="CONTPAQi"
-          class="h-16 w-32 object-contain opacity-70"
-        />
-        <img src="/marcas/dahua.webp" alt="Dahua" class="h-16 w-32 object-contain opacity-70" />
-        <img src="/marcas/dell.webp" alt="Dell" class="h-16 w-32 object-contain opacity-70" />
-        <img
-          src="/marcas/gstream.webp"
-          alt="G-Stream"
-          class="h-16 w-32 object-contain opacity-70"
-        />
-        <img
-          src="/marcas/hikvision.webp"
-          alt="Hikvision"
-          class="h-16 w-32 object-contain opacity-70"
-        />
-        <img
-          src="/marcas/ibmcloud.webp"
-          alt="IBM Cloud"
-          class="h-16 w-32 object-contain opacity-70"
-        />
-        <img src="/marcas/lenovo.webp" alt="Lenovo" class="h-16 w-32 object-contain opacity-70" />
-        <img
-          src="/marcas/microso.webp"
-          alt="Microsoft"
-          class="h-16 w-32 object-contain opacity-70"
-        />
-        <img src="/marcas/tplink.webp" alt="TP-Link" class="h-16 w-32 object-contain opacity-70" />
-        <img
-          src="/marcas/ubiquiti.webp"
-          alt="Ubiquiti"
-          class="h-16 w-32 object-contain opacity-70"
-        />
+    <div class="marquee relative overflow-hidden">
+      <div class="marquee-track">
+        <div class="marquee-group">
+          {
+            logos.map((logo) => (
+              <a
+                href={logo.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Abrir sitio de ${logo.alt}`}
+                class="shrink-0 transition-opacity duration-200 hover:opacity-100"
+              >
+                <img src={logo.src} alt={logo.alt} class="h-16 w-32 object-contain opacity-70" />
+              </a>
+            ))
+          }
+        </div>
+        <div class="marquee-group" aria-hidden="true">
+          {
+            logos.map((logo) => (
+              <a
+                href={logo.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                tabindex="-1"
+                aria-hidden="true"
+                class="shrink-0 transition-opacity duration-200 hover:opacity-100"
+              >
+                <img src={logo.src} alt={logo.alt} class="h-16 w-32 object-contain opacity-70" />
+              </a>
+            ))
+          }
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: uc-marquee 26s linear infinite;
+    will-change: transform;
+  }
+
+  .marquee-group {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding-right: 2rem;
+    flex-shrink: 0;
+  }
+
+  @keyframes uc-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .marquee:hover .marquee-track,
+  .marquee:focus-within .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+    }
+  }
+</style>
