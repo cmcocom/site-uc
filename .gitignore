@@ -33,3 +33,6 @@ npm-debug.log*
 # Carpeta legacy
 proyecto_nextjs/
 backup_*/
+
+# Carpeta de desarrollos internos — no incluir en deploy
+pro_adds/
