@@ -89,6 +89,8 @@ export default [
       "node_modules/**",
       "dist/**",
       ".astro/**",
+      "**/.next/**",
+      "pro_adds/**",
       "backup_**",
       "proyecto_nextjs/**",
       "**/*.astro",
