@@ -442,3 +442,76 @@ Obtener desde:
   - Project URL → `NEXT_PUBLIC_SUPABASE_URL`
   - `anon` key → `NEXT_PUBLIC_SUPABASE_ANON_KEY`
   - `service_role` key → `SUPABASE_SERVICE_ROLE_KEY`
+
+## 13.4 Auditoría comparativa de avance (Next vs Astro)
+
+Fecha auditoría: 2026-02-23  
+Objetivo: validar cobertura real del `unidadc-app` contra este documento maestro y detectar pendientes de migración desde `site-uc-astro`.
+
+### Estado general
+
+- **Avance sólido en Fundación + Núcleo de acceso + Comercial base**.
+- **Persistencia del cotizador clásico ya migrada a Next/Supabase**.
+- **MVP maestro aún incompleto** en módulos: CFDI operativo, ITIL, Consultoría TI, Licencias administrables, Plantillas/Notificaciones con trazabilidad.
+
+### Cobertura confirmada (implementado en `unidadc-app`)
+
+1. **Acceso y seguridad base**
+  - Login/logout/recovery/set-password.
+  - Guard de rutas por middleware.
+  - Gestión de miembros/roles (admin).
+  - Verificación de permisos por `has_permission`.
+
+2. **Comercial (parcial-alto)**
+  - Clientes + contactos + perfil fiscal (CRUD).
+  - Catálogo unificado (CRUD con permisos).
+  - Cotizaciones (CRUD encabezado + partidas + cambio de estado + historial + impresión).
+  - Cotizador clásico migrado con persistencia real (`quotes` / `quote_items`).
+
+3. **Infraestructura de datos**
+  - DDL MVP amplio (núcleo, comercial, CFDI, ITIL, consultoría, licencias, plantillas, notificaciones).
+  - RLS y políticas por rol/permiso disponibles en scripts SQL.
+
+### Pendientes críticos (no implementados o incompletos)
+
+1. **CFDI operativo (Fase 2)**
+  - Existen tablas y SQL, pero no módulo funcional completo en rutas/páginas/API del backoffice principal.
+
+2. **ITIL + Inventario (Fase 3)**
+  - Sin pantallas/handlers para tickets, comentarios, SLA y activos en `unidadc-app`.
+
+3. **Consultoría TI (Fase 4)**
+  - El flujo completo sigue en Astro como frontend local (no transaccional multiusuario).
+
+4. **Licencias (Fase 4)**
+  - La lógica del recomendador sigue hardcodeada en Astro (`licenseEstimator`), no migrada a `license_rules` + CRUD por rol.
+
+5. **Plantillas + Notificaciones (Fase 4)**
+  - Plantillas siguen en Astro con flujo local/mock.
+  - No está implementado el pipeline completo `notification_events`/`notification_deliveries` + canales Resend/Telegram con idempotencia y reintentos.
+
+6. **Estándares App Router por dominio (según sección 7.2)**
+  - Faltan paquetes de `loading.tsx`, `error.tsx`, `not-found.tsx` por módulos críticos.
+  - Falta segmentación modular por route groups (`(comercial)`, `(cfdi)`, `(itil)`, `(consultoria)`).
+
+### Migración desde Astro: estado
+
+- **Cotizador**: migrado y persistido en Next ✅
+- **Licencias**: pendiente de migración funcional a modelo administrable ❌
+- **Plantillas**: pendiente de migración a plantilla versionada + envío real ❌
+- **Consultoría TI**: pendiente de migración a `assessments*` + criticidad persistida ❌
+
+### Observaciones de calidad detectadas
+
+- Typecheck en verde.
+- Lint con pendientes no críticos de negocio, pero conviene corregir antes de escalar módulos.
+
+### Decisión recomendada de control
+
+- Mantener esta auditoría dentro del maestro y actualizarla al cierre de cada fase con formato fijo:
+  - fecha,
+  - alcance auditado,
+  - cobertura lograda,
+  - gaps críticos,
+  - siguiente bloque de implementación.
+
