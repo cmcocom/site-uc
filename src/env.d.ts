@@ -9,7 +9,3 @@ declare namespace App {
     };
   }
 }
-
-interface ImportMetaEnv {
-  readonly BANXICO_TOKEN?: string;
-}

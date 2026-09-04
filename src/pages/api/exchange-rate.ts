@@ -27,15 +27,41 @@ const SUCCESS_HEADERS = {
   "Cache-Control": "public, max-age=1800, stale-while-revalidate=600",
 };
 
+/**
+ * Devuelve la fecha "de hoy" en la zona horaria de Ciudad de México,
+ * en formato YYYY-MM-DD. Es indispensable calcularla en esta zona (y no
+ * en UTC, que es la del Worker de Cloudflare) porque Banxico determina y
+ * publica el FIX usando el calendario de México.
+ */
+const getMexicoCityTodayISO = (): string =>
+  new Intl.DateTimeFormat("en-CA", { timeZone: "America/Mexico_City" }).format(
+    new Date()
+  );
+
 const formatDate = (date: Date): string => {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
+  const year = date.getUTCFullYear();
+  const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(date.getUTCDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
 };
 
+/** Convierte "DD/MM/YYYY" (formato de Banxico) a "YYYY-MM-DD" comparable. */
+const toISO = (fechaBanxico: string): string => {
+  const [day, month, year] = fechaBanxico.split("/");
+  return `${year}-${month}-${day}`;
+};
+
+/**
+ * La serie SF43718 es el "Tipo de cambio FIX - Fecha de determinación".
+ * Banxico DETERMINA el FIX del día D durante la tarde de ese mismo día D,
+ * pero ese valor entra en vigor y se publica en el DOF hasta el día hábil
+ * D+1. Por lo tanto, el dato vigente "hoy" nunca es el último de la serie
+ * (que suele ser el recién determinado hoy, para vigencia de mañana), sino
+ * el más reciente cuya fecha sea estrictamente anterior a hoy.
+ */
 const extractLatestRate = (
-  data: BanxicoResponse
+  data: BanxicoResponse,
+  todayISO: string
 ): { rate: string; fecha: string } | null => {
   const datos = data.bmx?.series?.[0]?.datos;
 
@@ -43,7 +69,8 @@ const extractLatestRate = (
     return null;
   }
 
-  const latestData = datos[datos.length - 1];
+  const vigente = [...datos].reverse().find((d) => toISO(d.fecha) < todayISO);
+  const latestData = vigente ?? datos[datos.length - 1];
   const parsedRate = Number.parseFloat(latestData.dato);
 
   if (Number.isNaN(parsedRate)) {
@@ -59,7 +86,8 @@ const extractLatestRate = (
 const fetchBanxicoRate = async (
   startDate: Date,
   endDate: Date,
-  token: string
+  token: string,
+  todayISO: string
 ): Promise<{ rate: string; fecha: string } | null> => {
   const path = `${formatDate(startDate)}/${formatDate(endDate)}`;
   const url = new URL(
@@ -78,16 +106,14 @@ const fetchBanxicoRate = async (
     }
 
     const payload = (await response.json()) as BanxicoResponse;
-    return extractLatestRate(payload);
+    return extractLatestRate(payload, todayISO);
   } finally {
     globalThis.clearTimeout(timeoutId);
   }
 };
 
 export const GET: APIRoute = async (context) => {
-  const token = (
-    context.locals.runtime?.env?.BANXICO_TOKEN ?? import.meta.env.BANXICO_TOKEN
-  )?.trim();
+  const token = context.locals.runtime?.env?.BANXICO_TOKEN?.trim();
 
   if (!token) {
     return new Response(JSON.stringify({ error: "Token no configurado", hasToken: false }), {
@@ -96,12 +122,13 @@ export const GET: APIRoute = async (context) => {
     });
   }
 
-  const today = new Date();
+  const todayISO = getMexicoCityTodayISO();
+  const today = new Date(`${todayISO}T00:00:00Z`);
   const threeDaysAgo = new Date(today);
-  threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
+  threeDaysAgo.setUTCDate(today.getUTCDate() - 3);
 
   try {
-    const recentRate = await fetchBanxicoRate(threeDaysAgo, today, token);
+    const recentRate = await fetchBanxicoRate(threeDaysAgo, today, token, todayISO);
     if (recentRate) {
       return new Response(JSON.stringify(recentRate), {
         status: 200,
@@ -110,8 +137,8 @@ export const GET: APIRoute = async (context) => {
     }
 
     const weekAgo = new Date(today);
-    weekAgo.setDate(weekAgo.getDate() - 7);
-    const fallbackRate = await fetchBanxicoRate(weekAgo, today, token);
+    weekAgo.setUTCDate(today.getUTCDate() - 7);
+    const fallbackRate = await fetchBanxicoRate(weekAgo, today, token, todayISO);
 
     if (fallbackRate) {
       return new Response(JSON.stringify(fallbackRate), {

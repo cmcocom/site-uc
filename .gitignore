@@ -10,6 +10,8 @@ dist/
 # Variables de entorno
 .env
 .env.*
+.dev.vars
+.dev.vars.*
 
 # Sistema operativo
 .DS_Store
