@@ -445,16 +445,20 @@ Obtener desde:
 
 ## 13.4 Auditoría comparativa de avance (Next vs Astro)
 
+---
+
+### Auditoría 1 — 2026-02-23
+
 Fecha auditoría: 2026-02-23  
 Objetivo: validar cobertura real del `unidadc-app` contra este documento maestro y detectar pendientes de migración desde `site-uc-astro`.
 
-### Estado general
+#### Estado general
 
 - **Avance sólido en Fundación + Núcleo de acceso + Comercial base**.
 - **Persistencia del cotizador clásico ya migrada a Next/Supabase**.
 - **MVP maestro aún incompleto** en módulos: CFDI operativo, ITIL, Consultoría TI, Licencias administrables, Plantillas/Notificaciones con trazabilidad.
 
-### Cobertura confirmada (implementado en `unidadc-app`)
+#### Cobertura confirmada (implementado en `unidadc-app`)
 
 1. **Acceso y seguridad base**
   - Login/logout/recovery/set-password.
@@ -472,46 +476,70 @@ Objetivo: validar cobertura real del `unidadc-app` contra este documento maestro
   - DDL MVP amplio (núcleo, comercial, CFDI, ITIL, consultoría, licencias, plantillas, notificaciones).
   - RLS y políticas por rol/permiso disponibles en scripts SQL.
 
-### Pendientes críticos (no implementados o incompletos)
+#### Pendientes detectados (Auditoría 1)
 
-1. **CFDI operativo (Fase 2)**
-  - Existen tablas y SQL, pero no módulo funcional completo en rutas/páginas/API del backoffice principal.
+1. CFDI operativo, ITIL, Consultoría TI, Licencias, Plantillas/Notificaciones.
+2. Estándares App Router: faltan `loading.tsx`, `error.tsx`, `not-found.tsx` y route groups.
+3. Modelo de datos: duplicidad en `clients.email/phone/rfc` vs `client_contacts`.
 
-2. **ITIL + Inventario (Fase 3)**
-  - Sin pantallas/handlers para tickets, comentarios, SLA y activos en `unidadc-app`.
+---
 
-3. **Consultoría TI (Fase 4)**
-  - El flujo completo sigue en Astro como frontend local (no transaccional multiusuario).
+### Auditoría 2 — 2026-02-24
 
-4. **Licencias (Fase 4)**
-  - La lógica del recomendador sigue hardcodeada en Astro (`licenseEstimator`), no migrada a `license_rules` + CRUD por rol.
+Fecha auditoría: 2026-02-24  
+Alcance: revisión integral de rutas implementadas, módulos ITIL, notificaciones, modelo canónico de cliente.
 
-5. **Plantillas + Notificaciones (Fase 4)**
-  - Plantillas siguen en Astro con flujo local/mock.
-  - No está implementado el pipeline completo `notification_events`/`notification_deliveries` + canales Resend/Telegram con idempotencia y reintentos.
+#### Estado general
 
-6. **Estándares App Router por dominio (según sección 7.2)**
-  - Faltan paquetes de `loading.tsx`, `error.tsx`, `not-found.tsx` por módulos críticos.
-  - Falta segmentación modular por route groups (`(comercial)`, `(cfdi)`, `(itil)`, `(consultoria)`).
+- **Avance significativamente mayor al documentado en Auditoría 1.**
+- **ITIL Tickets y Activos: ya implementados y funcionales** (previamente marcados como pendientes).
+- **Pipeline de notificaciones: infraestructura implementada** (dispatcher, event-policy, canales Telegram y email).
+- **Modelo canónico cliente (Option C): implementado esta sesión** — inserta siempre `client_contacts` primario + `client_fiscal_profiles` opcional; `clients.email/phone/rfc` ya no son fuente canónica.
 
-### Migración desde Astro: estado
+#### Cobertura confirmada actualizada
 
-- **Cotizador**: migrado y persistido en Next ✅
-- **Licencias**: pendiente de migración funcional a modelo administrable ❌
-- **Plantillas**: pendiente de migración a plantilla versionada + envío real ❌
-- **Consultoría TI**: pendiente de migración a `assessments*` + criticidad persistida ❌
+| Módulo | Estado |
+|---|---|
+| Acceso y seguridad base | ✅ 100% |
+| Comercial: Clientes + contactos + perfil fiscal (CRUD + modelo canónico) | ✅ |
+| Comercial: Catálogo unificado (CRUD) | ✅ |
+| Comercial: Cotizaciones + partidas + estados + PDF + aprobación pública | ✅ |
+| ITIL: Tickets (CRUD + cambio estado + notificación Telegram) | ✅ |
+| ITIL: Activos/CMDB (CRUD + estado) | ✅ |
+| Notificaciones: infraestructura dispatcher + event-policy + canales | ✅ parcial (infra sí, `notification_events`/`notification_deliveries` en BD pendiente de integración) |
+| Admin: Miembros + roles + settings (SMTP, Templates, Notificaciones) | ✅ |
+| Aprobación pública de cotización por token | ✅ |
+| Eliminación segura con validación de movimientos | ✅ implementado 2026-02-24 |
+| Módulos stub estructurales (accounting, sales, purchases, warehouses, etc.) | ⚠️ placeholders |
+| CFDI operativo (timbrado SAT, ciclo PUE/PPD) | ❌ tablas + settings OK, flujo funcional pendiente |
+| Consultoría TI: `assessments*` multiusuario | ❌ sigue en Astro local |
+| Licencias Microsoft: `license_rules` administrables | ❌ sigue hardcodeada en Astro |
+| Hardening App Router: `loading/error/not-found`, route groups | ❌ no iniciado |
 
-### Observaciones de calidad detectadas
+#### Decisiones de modelo tomadas esta sesión
 
-- Typecheck en verde.
-- Lint con pendientes no críticos de negocio, pero conviene corregir antes de escalar módulos.
+1. **Modelo canónico cliente**: al crear un cliente siempre se inserta un `client_contacts` primario (`is_primary=true`, `full_name=""`) y opcionalmente un `client_fiscal_profiles` si hay RFC. `clients.email/phone/rfc` quedan como `null` para clientes nuevos.
+2. **Backfill SQL para clientes legacy**: script para normalizar clientes anteriores a Option C (crear contact primario + fiscal profile si tenían datos en `clients.*`). Ver `supabase/sql/mvp/2026-02-24-backfill-canonical-clients.sql`.
+3. **Eliminación segura**: delete con verificación de movimientos en app implementado para `catalog_items`, `clients`, `organization_members`, `tickets`, `assets`.
 
-### Decisión recomendada de control
+#### Gaps críticos al 2026-02-24
 
-- Mantener esta auditoría dentro del maestro y actualizarla al cierre de cada fase con formato fijo:
-  - fecha,
-  - alcance auditado,
-  - cobertura lograda,
-  - gaps críticos,
-  - siguiente bloque de implementación.
+1. **Consultoría TI** — siguiente bloque de trabajo (decisión tomada: migrar Fase 4 desde Astro).
+2. **CFDI operativo** — bloque posterior.
+3. **Licencias MS** — a definir junto a Consultoría TI.
+4. **Hardening** — antes de ir a producción escalada.
+
+#### Migración desde Astro: estado actualizado
+
+- **Cotizador**: ✅ migrado y persistido en Next
+- **Consultoría TI**: ❌ pendiente — próximo bloque
+- **Licencias**: ❌ pendiente — bloque posterior
+- **Plantillas**: ⚠️ admin UI ok, envío real por integrar
+
+---
+
+### Decisión de control para auditorías futuras
+
+Actualizar esta sección al cierre de cada bloque de trabajo con:
+- fecha, alcance auditado, cobertura lograda, gaps críticos, siguiente bloque.
 

@@ -52,6 +52,23 @@ const toISO = (fechaBanxico: string): string => {
 };
 
 /**
+ * Convierte la fecha de determinación de Banxico ("DD/MM/YYYY", día D)
+ * a la fecha de publicación y vigencia en el DOF (siguiente día hábil, día D+1).
+ */
+const toDOFPublicationDate = (fechaBanxico: string): string => {
+  const [day, month, year] = fechaBanxico.split("/").map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day));
+  do {
+    date.setUTCDate(date.getUTCDate() + 1);
+  } while (date.getUTCDay() === 0 || date.getUTCDay() === 6);
+
+  const d = String(date.getUTCDate()).padStart(2, "0");
+  const m = String(date.getUTCMonth() + 1).padStart(2, "0");
+  const y = date.getUTCFullYear();
+  return `${d}/${m}/${y}`;
+};
+
+/**
  * La serie SF43718 es el "Tipo de cambio FIX - Fecha de determinación".
  * Banxico DETERMINA el FIX del día D durante la tarde de ese mismo día D,
  * pero ese valor entra en vigor y se publica en el DOF hasta el día hábil
@@ -79,7 +96,7 @@ const extractLatestRate = (
 
   return {
     rate: parsedRate.toFixed(4),
-    fecha: latestData.fecha,
+    fecha: toDOFPublicationDate(latestData.fecha),
   };
 };
 
