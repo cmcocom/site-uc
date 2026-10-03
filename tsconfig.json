@@ -19,5 +19,5 @@
     "isolatedModules": true
   },
   "include": [".astro/types.d.ts", "src/**/*"],
-  "exclude": ["node_modules", "dist", ".astro", "backup_*", "proyecto_nextjs"]
+  "exclude": ["node_modules", "dist", ".astro"]
 }

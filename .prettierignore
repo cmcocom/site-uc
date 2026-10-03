@@ -5,6 +5,4 @@ dist
 package-lock.json
 pnpm-lock.yaml
 yarn.lock
-backup_*
-proyecto_nextjs
 *.zip

@@ -7,6 +7,9 @@ dist/
 # Astro cache
 .astro/
 
+# Cloudflare/Wrangler state
+.wrangler/
+
 # Variables de entorno
 .env
 .env.*
@@ -32,9 +35,6 @@ temp/
 *.log
 npm-debug.log*
 
-# Carpeta legacy
-proyecto_nextjs/
-backup_*/
-
-# Carpeta de desarrollos internos — no incluir en deploy
-pro_adds/
+# Diagramas (artefactos generados por archify / superseded)
+.archify/
+docs/architecture-diagram.html

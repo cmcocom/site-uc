@@ -11,26 +11,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://unidadc.com/cotizador</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://unidadc.com/consultoriati</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://unidadc.com/licencias</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://unidadc.com/plantillas</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://unidadc.com/genpass</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
